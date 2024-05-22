@@ -6,6 +6,7 @@ public class UserService {
 
 	private UserDao userDao;
 
+
 	public UserService(UserDao userDao) {
 		this.userDao = userDao;
 	}
@@ -22,5 +23,25 @@ public class UserService {
 		} else {
 			return "FAIL";
 		}
+	}
+
+	public void doProcess() {
+		System.out.println("doProcess() method started");
+		pushMsgToKafkaTopic("msg");
+		System.out.println("doProcess() method ended");
+	}
+
+	public void pushMsgToKafkaTopic(String msg) {
+		System.out.println("msg pushing to kafka..");
+	}
+
+	public String doWork(String msg) {
+		String formattedMsg = formatMsg(msg);
+		return formattedMsg;
+
+	}
+
+	private String formatMsg(String msg) {
+		return msg.toUpperCase();
 	}
 }
